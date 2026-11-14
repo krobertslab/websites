@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kirk Roberts, PhD</title>
+    <meta name="description" content="Kirk Roberts, PhD: natural language processing and information retrieval for medicine, McWilliams School of Biomedical Informatics, UTHealth Houston.">
+    <!-- Single-file researcher profile. No framework, no build step: host as-is on GitHub Pages. -->
+    <style>
+      /* Layout idea: dark animated hero, floating info card, then light content sections on a 1120px column. */
+      :root {
+        color-scheme: light;
+        --ink: #15251e;
+        --muted: #5c6b64;
+        --bg: #fbfdfb;
+        --surface: #ffffff;
+        --soft: #eff7f2;
+        --line: rgba(21, 60, 40, 0.12);
+        --blue: #15803d; /* primary accent (green) */
+        --teal: #0d8a72;
+        --gold: #b7791f;
+        --shadow: 0 24px 60px rgba(21, 60, 40, 0.12);
+        --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --ink: #e4efe8;
+          --muted: #9bb0a5;
+          --bg: #08140f;
+          --surface: #0e1f18;
+          --soft: #132a20;
+          --line: rgba(228, 239, 232, 0.12);
+          --blue: #5fd394;
+          --teal: #3cc9b0;
+          --gold: #e2a54a;
+          --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        }
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --ink: #e4efe8;
+        --muted: #9bb0a5;
+        --bg: #08140f;
+        --surface: #0e1f18;
+        --soft: #132a20;
+        --line: rgba(228, 239, 232, 0.12);
+        --blue: #5fd394;
+        --teal: #3cc9b0;
+        --gold: #e2a54a;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background:
+          radial-gradient(1200px 600px at 100% 900px, color-mix(in srgb, var(--blue) 6%, transparent), transparent 70%),
+          var(--bg);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+
+      a { color: inherit; }
+      a:focus-visible, button:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+
+      .wrap {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      /* ---------- Nav ---------- */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #166534, #0f766e);
+        color: #ffffff;
+        font-size: 12px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .nav-links a { text-decoration: none; }
+      .nav-links a:hover { color: var(--ink); }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #15803d, #0d8a72);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 650;
+        box-shadow: 0 10px 22px rgba(21, 128, 61, 0.2);
+        white-space: nowrap;
+      }
+
+      /* ---------- Hero (always dark) ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background: #04170f;
+        color: #ffffff;
+      }
+
+      #hero-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(4, 23, 15, 0.9) 0%, rgba(4, 30, 20, 0.6) 50%, rgba(4, 30, 20, 0.25) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(3, 18, 12, 0.7) 100%);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 40px;
+        padding: 96px 0 120px;
+      }
+
+      .avatar {
+        display: grid;
+        width: 176px;
+        height: 176px;
+        place-items: center;
+        border: 1px solid rgba(169, 230, 221, 0.35);
+        border-radius: 50%;
+        background: linear-gradient(135deg, #166534, #0f766e);
+        color: #ffffff;
+        font-size: 56px;
+        font-weight: 760;
+        letter-spacing: -0.02em;
+        object-fit: cover;
+        object-position: 50% 22%;
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06), 0 24px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      .eyebrow {
+        width: fit-content;
+        margin: 0 0 18px;
+        padding: 7px 12px;
+        border: 1px solid rgba(169, 230, 221, 0.28);
+        border-radius: 999px;
+        background: rgba(14, 147, 132, 0.14);
+        color: rgba(245, 255, 252, 0.88);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(44px, 7vw, 68px);
+        line-height: 0.98;
+        font-weight: 780;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+
+      .hero-copy {
+        max-width: 640px;
+        margin: 22px 0 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 20px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 11px 18px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.primary {
+        background: linear-gradient(135deg, #ffffff, #edf9f1);
+        color: #132033;
+      }
+
+      .button.secondary {
+        border-color: rgba(169, 230, 221, 0.28);
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+      }
+
+      /* ---------- Floating info strip ---------- */
+      .info-strip {
+        position: relative;
+        z-index: 3;
+        margin-top: -58px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .info-item {
+        padding: 22px 24px;
+        border-right: 1px solid var(--line);
+      }
+
+      .info-item:last-child { border-right: 0; }
+
+      .label {
+        margin: 0 0 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .info-value {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 720;
+      }
+
+      .info-sub {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* ---------- Sections ---------- */
+      section { padding: 88px 0 0; scroll-margin-top: 64px; }
+      section:last-of-type { padding-bottom: 96px; }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 36px;
+        line-height: 1.05;
+        font-weight: 760;
+        letter-spacing: -0.015em;
+        text-wrap: balance;
+      }
+
+      .kicker {
+        margin: 0 0 10px;
+        color: var(--teal);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 68ch;
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 48px;
+      }
+
+      .about-text p { max-width: 66ch; margin: 0 0 16px; font-size: 17px; }
+
+      .facts {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+        margin: 0;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft);
+      }
+
+      .facts div { display: grid; gap: 2px; }
+      .facts dt { color: var(--muted); font-size: 13px; font-weight: 650; }
+      .facts dd { margin: 0; font-weight: 650; }
+
+      /* Research areas */
+      .areas {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .area {
+        display: grid;
+        gap: 10px;
+        align-content: start;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--accent, var(--blue));
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .area:nth-child(2) { --accent: var(--teal); }
+      .area:nth-child(3) { --accent: var(--gold); }
+
+      .area h3 { margin: 0; font-size: 19px; font-weight: 720; }
+      .area p { margin: 0; color: var(--muted); }
+
+      .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+      .tag {
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+      }
+
+      .grant {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+
+      /* Publications */
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+
+      .filter {
+        min-height: 34px;
+        padding: 6px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--muted);
+        font: inherit;
+        font-size: 14px;
+        font-weight: 650;
+        cursor: pointer;
+      }
+
+      .filter:hover { color: var(--ink); }
+      .filter[aria-pressed="true"] {
+        border-color: transparent;
+        background: linear-gradient(135deg, #15803d, #0d8a72);
+        color: #ffffff;
+      }
+
+      .pubs {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .pub {
+        display: grid;
+        grid-template-columns: 64px 1fr auto;
+        gap: 20px;
+        align-items: baseline;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .pub[hidden] { display: none; }
+
+      .pub-year {
+        color: var(--muted);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .pub-title { margin: 0; font-size: 17px; font-weight: 700; }
+      .pub-authors { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+      .pub-authors strong { color: var(--ink); font-weight: 650; }
+      .pub-venue { margin: 2px 0 0; font-size: 15px; font-style: italic; }
+
+      .pub-links { display: flex; gap: 8px; }
+      .pub-links a {
+        padding: 4px 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .pub-links a:hover { color: var(--blue); border-color: var(--blue); }
+
+      .award {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 1px 8px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--gold) 16%, transparent);
+        color: var(--gold);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      /* Team */
+      .team {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .person-mark {
+        display: grid;
+        flex: none;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--soft);
+        color: var(--teal);
+        font-size: 15px;
+        font-weight: 760;
+      }
+
+      .person p { margin: 0; }
+      .person-link { padding-right: 64px; }
+      .person-name { font-weight: 700; }
+      .person-role { color: var(--muted); font-size: 14px; }
+
+      .join {
+        margin-top: 20px;
+        padding: 20px 24px;
+        border: 1px dashed color-mix(in srgb, var(--teal) 50%, transparent);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--teal) 6%, transparent);
+      }
+      .join p { margin: 0; max-width: 72ch; }
+
+      /* Teaching + News */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+
+      .list { margin: 0; padding: 0; list-style: none; }
+      .list li {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .list .when {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+        padding-top: 2px;
+      }
+      .list strong { font-weight: 700; }
+
+      /* Contact */
+      .contact {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+        padding: 40px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #0b2e1f, #0b3a33);
+        color: #ffffff;
+      }
+
+      .contact h2 { color: #ffffff; }
+      .contact .lede { color: rgba(255, 255, 255, 0.75); }
+      .contact .kicker { color: #86e3ac; }
+
+      .contact dl { display: grid; gap: 14px; margin: 0; }
+      .contact dt { color: rgba(255, 255, 255, 0.6); font-size: 13px; font-weight: 650; }
+      .contact dd { margin: 0; font-weight: 650; }
+      .contact a { text-decoration-color: rgba(255, 255, 255, 0.35); }
+
+      footer {
+        padding: 28px 0 40px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .muted { color: var(--muted); }
+      .mono { font-family: var(--mono); font-size: 14px; }
+      .stat { font-variant-numeric: tabular-nums; }
+      .me { font-weight: 700; color: var(--ink); }
+      .lab-member { text-decoration: underline; text-decoration-color: var(--teal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+      .pub-note { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+      .cites {
+        display: inline-block;
+        margin-left: 8px;
+        padding: 1px 8px;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--muted);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 650;
+        font-variant-numeric: tabular-nums;
+      }
+      .more { margin: 20px 0 0; font-weight: 650; }
+      .more a { color: var(--blue); text-decoration: none; }
+      .more a:hover { text-decoration: underline; }
+
+      .person-link {
+        position: relative;
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      }
+      .person-link:hover {
+        border-color: color-mix(in srgb, var(--blue) 45%, transparent);
+        box-shadow: 0 10px 24px color-mix(in srgb, var(--blue) 12%, transparent);
+        transform: translateY(-1px);
+      }
+      .scholar-chip {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .sub-head { margin: 44px 0 20px; }
+      .sub-title { margin: 0; font-size: 24px; font-weight: 740; letter-spacing: -0.01em; }
+      @media (prefers-reduced-motion: reduce) { .person-link { transition: none; } .person-link:hover { transform: none; } }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 900px) {
+        .nav-links { display: none; }
+        .about-grid, .two-col, .contact { grid-template-columns: 1fr; }
+        .areas { grid-template-columns: 1fr; }
+        .team { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @media (max-width: 640px) {
+        .hero-inner { grid-template-columns: 1fr; gap: 24px; padding: 64px 0 100px; }
+        .avatar { width: 112px; height: 112px; font-size: 36px; }
+        .hero-copy { font-size: 18px; }
+        .info-grid { grid-template-columns: 1fr; }
+        .info-item { border-right: 0; border-bottom: 1px solid var(--line); }
+        .info-item:last-child { border-bottom: 0; }
+        .section-head { flex-direction: column; align-items: start; }
+        h2 { font-size: 30px; }
+        .pub { grid-template-columns: 1fr; gap: 6px; }
+        .team { grid-template-columns: 1fr; }
+        .contact { padding: 28px 22px; }
+        .list li { grid-template-columns: 1fr; gap: 2px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav wrap" aria-label="Main">
+        <a class="brand" href="#top"><span class="brand-mark">KR</span>Kirk Roberts</a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#lab">Lab</a></li>
+          <li><a href="#career">Career</a></li>
+        </ul>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <div class="hero" id="top">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-inner wrap">
+        <img class="avatar" src="src/kirk.jpg" alt="Kirk Roberts" width="176" height="176">
+        <div>
+          <p class="eyebrow">Associate Professor · McWilliams School of Biomedical Informatics</p>
+          <h1>Kirk Roberts, PhD</h1>
+          <p class="hero-copy">
+            I work on natural language processing and information retrieval for medicine:
+            extracting information from clinical text, answering questions over electronic
+            health records, and building shared evaluations for biomedical search.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#publications">Selected publications</a>
+            <a class="button secondary" href="https://scholar.google.com/citations?user=ukBG4CUAAAAJ&amp;hl=en">Google Scholar</a>
+            <a class="button secondary" href="https://orcid.org/0000-0001-6525-5213">ORCID</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="wrap">
+        <div class="info-strip">
+          <div class="info-grid">
+            <div class="info-item">
+              <p class="label">Position</p>
+              <p class="info-value">Associate Professor</p>
+              <p class="info-sub">McWilliams School of Biomedical Informatics, UTHealth Houston</p>
+            </div>
+            <div class="info-item">
+              <p class="label">Lab</p>
+              <p class="info-value">9 students</p>
+              <p class="info-sub">Clinical NLP and biomedical information retrieval</p>
+            </div>
+            <div class="info-item">
+              <p class="label">Google Scholar · Nov 2026</p>
+              <p class="info-value stat">8,760 citations</p>
+              <p class="info-sub stat">h-index 45 · i10-index 125</p>
+            </div>
+          </div>
+        </div>
+
+        <section id="about">
+          <div class="about-grid">
+            <div class="about-text">
+              <p class="kicker">About</p>
+              <h2>Language technology for clinical text and biomedical search</h2>
+              <p style="margin-top: 22px;">
+                I am an Associate Professor at the McWilliams School of Biomedical Informatics at
+                UTHealth Houston, where I have been on the faculty since 2016. My research covers
+                natural language processing, information retrieval and biomedical informatics,
+                with a focus on making the information in clinical notes and the biomedical
+                literature usable by clinicians, patients and researchers.
+              </p>
+              <p>
+                Before joining UTHealth, I was a postdoctoral fellow at the Lister Hill National
+                Center for Biomedical Communications at the U.S. National Library of Medicine. I have
+                helped organize several community evaluations, including the TREC Precision
+                Medicine and TREC-COVID tracks and the TAC Adverse Drug Reaction Extraction track.
+              </p>
+            </div>
+            <dl class="facts">
+              <div><dt>PhD</dt><dd>Computer Science, University of Texas at Dallas, 2013</dd></div>
+              <div><dt>Postdoc</dt><dd>U.S. National Library of Medicine, 2013–2016</dd></div>
+              <div><dt>Interests</dt><dd>Natural language processing, information retrieval, biomedical informatics</dd></div>
+              <div><dt>ORCID</dt><dd><a class="mono" href="https://orcid.org/0000-0001-6525-5213">0000-0001-6525-5213</a></dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section id="research">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Research</p>
+              <h2>Research areas</h2>
+            </div>
+          </div>
+          <div class="areas">
+            <article class="area">
+              <h3>Clinical information extraction</h3>
+              <p>Pulling concepts, relations and findings out of clinical notes, radiology reports and scanned EHR documents, increasingly with large language models.</p>
+              <div class="tags"><span class="tag">LLMs</span><span class="tag">Annotation guidelines</span><span class="tag">Radiology</span></div>
+            </article>
+            <article class="area">
+              <h3>Question answering over health records</h3>
+              <p>Letting clinicians and researchers ask questions of electronic health records in plain language and get answers they can check.</p>
+              <div class="tags"><span class="tag">EHR QA</span><span class="tag">Semantic parsing</span><span class="tag">quEHRy</span></div>
+            </article>
+            <article class="area">
+              <h3>Biomedical information retrieval</h3>
+              <p>Search over the biomedical literature, clinical trials and datasets, and the shared test collections used to evaluate it.</p>
+              <div class="tags"><span class="tag">TREC-COVID</span><span class="tag">Precision medicine</span><span class="tag">Dataset retrieval</span></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="publications">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Publications</p>
+              <h2>Selected publications</h2>
+              <p class="pub-note"><span class="me">Bold</span>: Kirk Roberts · <span class="lab-member">Underlined</span>: lab member or alumni · Citation counts from Google Scholar</p>
+            </div>
+            <div class="filters" role="group" aria-label="Filter publications by topic">
+              <button class="filter" id="f-all" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="filter" id="f-ie" type="button" data-filter="ie" aria-pressed="false">Extraction</button>
+              <button class="filter" id="f-qa" type="button" data-filter="qa" aria-pressed="false">Question answering</button>
+              <button class="filter" id="f-ir" type="button" data-filter="ir" aria-pressed="false">Retrieval</button>
+            </div>
+          </div>
+          <ol class="pubs">
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2026</span>
+              <div>
+                <p class="pub-title">Synthesized annotation guidelines are knowledge-lite boosters for clinical information extraction</p>
+                <p class="pub-authors"><span class="lab-member">Hsu E</span>, Ugbala M, Kookal KK, Zouaidi K, Rider NL, Walji MF, <strong>Roberts K</strong>.</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocag084">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2024</span>
+              <div>
+                <p class="pub-title">Large language models for reducing clinicians' documentation burden</p>
+                <p class="pub-authors"><strong>Roberts K</strong>.</p>
+                <p class="pub-venue">Nature Medicine</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1038/s41591-024-02888-w">DOI</a></div>
+            </li>
+            <li class="pub" data-type="qa">
+              <span class="pub-year">2024</span>
+              <div>
+                <p class="pub-title">Question answering for electronic health records: scoping review of datasets and models</p>
+                <p class="pub-authors">Bardhan J, <strong>Roberts K</strong>, Wang DZ.</p>
+                <p class="pub-venue">Journal of Medical Internet Research</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.2196/53636">DOI</a></div>
+            </li>
+            <li class="pub" data-type="qa">
+              <span class="pub-year">2023</span>
+              <div>
+                <p class="pub-title">quEHRy: a question answering system to query electronic health records</p>
+                <p class="pub-authors"><span class="lab-member">Soni S</span>, <span class="lab-member">Datta S</span>, <strong>Roberts K</strong>.</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocad050">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2022</span>
+              <div>
+                <p class="pub-title">Deep learning-based NLP data pipeline for EHR-scanned document information extraction</p>
+                <p class="pub-authors"><span class="lab-member">Hsu E</span>, Malagaris I, Kuo YF, Sultana R, <strong>Roberts K</strong>.</p>
+                <p class="pub-venue">JAMIA Open <span class="cites">87 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamiaopen/ooac045">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2021</span>
+              <div>
+                <p class="pub-title">TREC-COVID: constructing a pandemic information retrieval test collection</p>
+                <p class="pub-authors">Voorhees E, Alam T, Bedrick S, Demner-Fushman D, Hersh WR, Lo K, <strong>Roberts K</strong>, Soboroff I, Wang LL.</p>
+                <p class="pub-venue">ACM SIGIR Forum <span class="cites">416 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1145/3451964.3451965">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2020</span>
+              <div>
+                <p class="pub-title">TREC-COVID: rationale and structure of an information retrieval shared task for COVID-19</p>
+                <p class="pub-authors"><strong>Roberts K</strong>, Alam T, Bedrick S, Demner-Fushman D, Lo K, Soboroff I, Voorhees E, Wang LL, Hersh WR.</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">173 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocaa091">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2020</span>
+              <div>
+                <p class="pub-title">Deep learning in clinical natural language processing: a methodical review</p>
+                <p class="pub-authors">Wu S, <strong>Roberts K</strong>, <span class="lab-member">Datta S</span>, Du J, Ji Z, <span class="lab-member">Si Y</span>, <span class="lab-member">Soni S</span>, Wang Q, Wei Q, Xiang Y, Zhao B, Xu H.</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">654 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocz200">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2019</span>
+              <div>
+                <p class="pub-title">Enhancing clinical concept extraction with contextual embeddings</p>
+                <p class="pub-authors"><span class="lab-member">Si Y</span>, Wang J, Xu H, <strong>Roberts K</strong>.</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">465 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocz096">DOI</a></div>
+            </li>
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2016</span>
+              <div>
+                <p class="pub-title">Learning to read chest X-rays: recurrent neural cascade model for automated image annotation</p>
+                <p class="pub-authors">Shin HC, <strong>Roberts K</strong>, Lu L, Demner-Fushman D, Yao J, Summers RM.</p>
+                <p class="pub-venue">IEEE Conference on Computer Vision and Pattern Recognition (CVPR) <span class="cites">564 citations</span></p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1109/CVPR.2016.274">DOI</a></div>
+            </li>
+          </ol>
+          <p class="more"><a href="https://scholar.google.com/citations?user=ukBG4CUAAAAJ&amp;hl=en">Full publication list on Google Scholar →</a></p>
+        </section>
+
+        <section id="lab">
+          <div class="section-head">
+            <div>
+              <p class="kicker">Lab</p>
+              <h2>Current students</h2>
+            </div>
+          </div>
+          <!-- Add degree program and year to each .person-role, e.g. "PhD student, 3rd year".
+               To link a profile, turn the <div class="person"> into <a class="person person-link" href="..."> and add the Scholar chip. -->
+          <div class="team">
+            <a class="person person-link" href="https://scholar.google.com/citations?user=uOeW3MAAAAAJ&amp;hl=en" aria-label="Enshuo (David) Hsu on Google Scholar"><span class="person-mark">EH</span><div><p class="person-name">Enshuo (David) Hsu</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=AKyClScAAAAJ&amp;hl=en" aria-label="Ekin Soysal on Google Scholar"><span class="person-mark">ES</span><div><p class="person-name">Ekin Soysal</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=UUBrD1MAAAAJ&amp;hl=en" aria-label="Alaleh Hamidi on Google Scholar"><span class="person-mark">AH</span><div><p class="person-name">Alaleh Hamidi</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <div class="person"><span class="person-mark">SG</span><div><p class="person-name">Shefali Gupta</p><p class="person-role">Student</p></div></div>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=cxYWzUMAAAAJ&amp;hl=en" aria-label="Luke Rasmussen on Google Scholar"><span class="person-mark">LR</span><div><p class="person-name">Luke Rasmussen</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <div class="person"><span class="person-mark">ES</span><div><p class="person-name">Evan Sholle</p><p class="person-role">Student</p></div></div>
+            <div class="person"><span class="person-mark">JK</span><div><p class="person-name">Junyoung Kim</p><p class="person-role">Student</p></div></div>
+            <div class="person"><span class="person-mark">LY</span><div><p class="person-name">Linzi Yu</p><p class="person-role">Student</p></div></div>
+            <div class="person"><span class="person-mark">TL</span><div><p class="person-name">Trevor La</p><p class="person-role">Student</p></div></div>
+          </div>
+
+          <div class="section-head sub-head">
+            <div>
+              <h3 class="sub-title">Alumni</h3>
+            </div>
+          </div>
+          <div class="team">
+            <a class="person person-link" href="https://scholar.google.com/citations?user=z1yB79kAAAAJ&amp;hl=en" aria-label="Yuqi Si on Google Scholar"><span class="person-mark">YS</span><div><p class="person-name">Yuqi Si</p><p class="person-role">Baylor Scott &amp; White Health</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=9VD2kwMAAAAJ&amp;hl=en" aria-label="Surabhi Datta on Google Scholar"><span class="person-mark">SD</span><div><p class="person-name">Surabhi Datta</p><p class="person-role">IMO Health</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=o8Qzs0QAAAAJ&amp;hl=en" aria-label="Sarvesh Soni on Google Scholar"><span class="person-mark">SS</span><div><p class="person-name">Sarvesh Soni</p><p class="person-role">U.S. National Library of Medicine</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=R9nwQaEAAAAJ&amp;hl=en" aria-label="Yumeng (Summer) Yang on Google Scholar"><span class="person-mark">YY</span><div><p class="person-name">Yumeng (Summer) Yang</p><p class="person-role">Visa</p></div><span class="scholar-chip">Scholar ↗</span></a>
+          </div>
+        </section>
+
+        <section id="career">
+          <div class="two-col">
+            <div>
+              <p class="kicker">Career</p>
+              <h2>Appointments</h2>
+              <ul class="list" style="margin-top: 24px;">
+                <li><span class="when">2021–now</span><span><strong>Associate Professor</strong><br><span class="muted">McWilliams School of Biomedical Informatics, UTHealth Houston</span></span></li>
+                <li><span class="when">2016–2021</span><span><strong>Assistant Professor</strong><br><span class="muted">School of Biomedical Informatics, UTHealth Houston</span></span></li>
+                <li><span class="when">2013–2016</span><span><strong>Postdoctoral Fellow</strong><br><span class="muted">Lister Hill National Center for Biomedical Communications, U.S. National Library of Medicine</span></span></li>
+              </ul>
+            </div>
+            <div>
+              <p class="kicker">Education</p>
+              <h2>Degrees</h2>
+              <ul class="list" style="margin-top: 24px;">
+                <li><span class="when">2013</span><span><strong>PhD, Computer Science</strong><br><span class="muted">University of Texas at Dallas</span></span></li>
+                <li><span class="when">2009</span><span><strong>MS, Computer Science</strong><br><span class="muted">University of Texas at Dallas</span></span></li>
+                <li><span class="when">2005</span><span><strong>BS, Computer Science</strong><br><span class="muted">Georgia Institute of Technology</span></span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact">
+          <div class="contact">
+            <div>
+              <p class="kicker">Contact</p>
+              <h2>Get in touch</h2>
+              <p class="lede" style="margin-top: 14px;">
+                For collaborations, shared tasks or questions about joining the lab, please reach out.
+              </p>
+            </div>
+            <dl>
+              <div><dt>Email</dt><dd><a href="mailto:kirk.roberts@uth.tmc.edu">kirk.roberts@uth.tmc.edu</a></dd></div>
+              <div><dt>Institution</dt><dd>McWilliams School of Biomedical Informatics<br>UTHealth Houston</dd></div>
+              <div><dt>Profiles</dt><dd><a href="https://scholar.google.com/citations?user=ukBG4CUAAAAJ&amp;hl=en">Google Scholar</a> · <a href="https://orcid.org/0000-0001-6525-5213">ORCID</a></dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">© 2026 Kirk Roberts · Last updated November 2026</div>
+    </footer>
+
+    <script>
+      // Hero background: lines of (synthetic) clinical notes drift past while
+      // entity annotations fade in and out over them, like an NLP tagger at work.
+      (function () {
+        const canvas = document.getElementById("hero-canvas");
+        const ctx = canvas.getContext("2d");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const COLORS = {
+          PROBLEM: "134, 239, 172",    // green
+          MEDICATION: "94, 234, 212",  // teal
+          TEST: "147, 210, 253",       // sky
+          ANATOMY: "253, 214, 140",    // amber
+          QUESTION: "190, 242, 100"    // lime
+        };
+
+        const NOTES = [
+          "Pt is a 67 y/o F with h/o [type 2 diabetes|PROBLEM] and [CHF|PROBLEM], presents with [dyspnea|PROBLEM] x3 days.",
+          "Started [metformin 500 mg BID|MEDICATION]; [HbA1c|TEST] 7.9% on admission.",
+          "[Chest X-ray|TEST] shows small [pleural effusion|PROBLEM] at the left [costophrenic angle|ANATOMY].",
+          "Denies [chest pain|PROBLEM]. [Troponin|TEST] negative x2. Continue [aspirin 81 mg|MEDICATION] daily.",
+          "[Which patients had lactate > 2 within 24h of ICU admission?|QUESTION]",
+          "Assessment: [community-acquired pneumonia|PROBLEM]; started [ceftriaxone|MEDICATION] and [azithromycin|MEDICATION].",
+          "[BP|TEST] 142/88, [HR|TEST] 96, SpO2 93% on RA. [Bibasilar crackles|PROBLEM] on exam.",
+          "[CT abdomen|TEST] without acute findings. Mild [hepatic steatosis|PROBLEM] noted in the [right lobe|ANATOMY].",
+          "Hx of [atrial fibrillation|PROBLEM] on [apixaban 5 mg|MEDICATION]; [INR|TEST] not indicated.",
+          "[What is the most recent creatinine for this patient?|QUESTION]",
+          "Smoker, 20 pack-years. [COPD|PROBLEM] exacerbation; [albuterol nebs|MEDICATION] q4h PRN.",
+          "[MRI brain|TEST]: no acute infarct. Chronic [white matter changes|PROBLEM] in [periventricular region|ANATOMY]."
+        ];
+
+        function parse(note) {
+          const parts = [];
+          const re = /\[([^|\]]+)\|([A-Z]+)\]/g;
+          let last = 0, m;
+          while ((m = re.exec(note))) {
+            if (m.index > last) parts.push({ text: note.slice(last, m.index) });
+            parts.push({ text: m[1], label: m[2], phase: Math.random() * Math.PI * 2 });
+            last = re.lastIndex;
+          }
+          if (last < note.length) parts.push({ text: note.slice(last) });
+          return parts;
+        }
+
+        const MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace';
+        let w, h, rows;
+
+        function layout() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          w = canvas.clientWidth;
+          h = canvas.clientHeight;
+          canvas.width = w * dpr;
+          canvas.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          const lineH = 52;
+          const count = Math.ceil(h / lineH) + 1;
+          rows = [];
+          for (let r = 0; r < count; r++) {
+            const size = 14 + ((r * 7) % 5);
+            const font = size + "px " + MONO;
+            ctx.font = font;
+            // Each row strings several notes together, starting at a different note.
+            const segs = [];
+            let x = 0;
+            for (let k = 0; k < 5; k++) {
+              for (const p of parse(NOTES[(r * 5 + k * 3) % NOTES.length] + "   ")) {
+                const width = ctx.measureText(p.text).width;
+                segs.push(Object.assign({ x, width }, p));
+                x += width;
+              }
+            }
+            rows.push({
+              y: 30 + r * lineH,
+              font,
+              size,
+              segs,
+              total: x,
+              offset: Math.random() * x,
+              speed: (r % 2 ? -1 : 1) * (6 + ((r * 13) % 9)),
+              alpha: 0.28 + ((r * 3) % 5) * 0.08
+            });
+          }
+        }
+
+        function roundRect(x, y, rw, rh, rad) {
+          ctx.beginPath();
+          ctx.moveTo(x + rad, y);
+          ctx.arcTo(x + rw, y, x + rw, y + rh, rad);
+          ctx.arcTo(x + rw, y + rh, x, y + rh, rad);
+          ctx.arcTo(x, y + rh, x, y, rad);
+          ctx.arcTo(x, y, x + rw, y, rad);
+          ctx.closePath();
+        }
+
+        function draw(t) {
+          ctx.clearRect(0, 0, w, h);
+          ctx.textBaseline = "middle";
+          for (const row of rows) {
+            ctx.font = row.font;
+            const off = ((row.offset + row.speed * t) % row.total + row.total) % row.total;
+            for (let copy = -1; copy <= Math.ceil(w / row.total); copy++) {
+              const base = copy * row.total - off;
+              for (const s of row.segs) {
+                const x = base + s.x;
+                if (x > w || x + s.width < 0) continue;
+                if (s.label) {
+                  const c = COLORS[s.label];
+                  const on = reduceMotion ? 1 : Math.max(0, Math.sin(t * 0.5 + s.phase));
+                  if (on > 0.02) {
+                    roundRect(x - 4, row.y - row.size * 0.8, s.width + 8, row.size * 1.6, 5);
+                    ctx.fillStyle = "rgba(" + c + "," + (0.16 * on) + ")";
+                    ctx.fill();
+                    ctx.fillStyle = "rgba(" + c + "," + (0.9 * on) + ")";
+                    ctx.fillRect(x - 4, row.y + row.size * 0.8 - 2, s.width + 8, 2);
+                    ctx.font = "600 9px " + MONO;
+                    ctx.fillStyle = "rgba(" + c + "," + (0.85 * on) + ")";
+                    ctx.fillText(s.label, x - 2, row.y - row.size * 0.8 - 7);
+                    ctx.font = row.font;
+                  }
+                  ctx.fillStyle = "rgba(" + c + "," + (row.alpha + 0.45 * on) + ")";
+                } else {
+                  ctx.fillStyle = "rgba(220, 238, 228," + row.alpha + ")";
+                }
+                ctx.fillText(s.text, x, row.y);
+              }
+            }
+          }
+        }
+
+        let start = null;
+        function frame(now) {
+          if (start === null) start = now;
+          draw((now - start) / 1000);
+          requestAnimationFrame(frame);
+        }
+
+        layout();
+        window.addEventListener("resize", () => { layout(); if (reduceMotion) draw(0); });
+        if (reduceMotion) draw(0); else requestAnimationFrame(frame);
+      })();
+
+      // Publication filter
+      (function () {
+        const buttons = document.querySelectorAll(".filter");
+        const pubs = document.querySelectorAll(".pub");
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const f = btn.dataset.filter;
+            buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            pubs.forEach((p) => { p.hidden = f !== "all" && p.dataset.type !== f; });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
