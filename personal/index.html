@@ -760,16 +760,29 @@
             <div>
               <p class="kicker">Publications</p>
               <h2>Selected publications</h2>
-              <p class="pub-note"><span class="me">Bold</span>: Kirk Roberts · <span class="lab-member">Underlined</span>: lab member or alumni · Citation counts from Google Scholar</p>
+              <p class="pub-note"><span class="me">Bold</span>: Kirk Roberts · <span class="lab-member">Underlined</span>: lab member or alumni</p>
             </div>
             <div class="filters" role="group" aria-label="Filter publications by topic">
-              <button class="filter" id="f-all" type="button" data-filter="all" aria-pressed="true">All</button>
-              <button class="filter" id="f-ie" type="button" data-filter="ie" aria-pressed="false">Extraction</button>
-              <button class="filter" id="f-qa" type="button" data-filter="qa" aria-pressed="false">Question answering</button>
-              <button class="filter" id="f-ir" type="button" data-filter="ir" aria-pressed="false">Retrieval</button>
+              <button class="filter" id="f-all" type="button" data-filter="all" aria-pressed="true">all</button>
+              <button class="filter" id="f-ie" type="button" data-filter="ie" aria-pressed="false">information extraction</button>
+              <button class="filter" id="f-qa" type="button" data-filter="qa" aria-pressed="false">question answering</button>
+              <button class="filter" id="f-ir" type="button" data-filter="ir" aria-pressed="false">information retrieval</button>
+	      <!--<button class="filter" id="f-method" type="button" data-filter="method" aria-pressed="false">method</button>-->
+	      <!--<button class="filter" id="f-review" type="button" data-filter="review" aria-pressed="false">review/perspective</button>-->
             </div>
           </div>
           <ol class="pubs">
+
+            <li class="pub" data-type="TODO">
+              <span class="pub-year">2026</span>
+              <div>
+                <p class="pub-title">Retrieval, not hallucinations, will be the limiting factor for LLM-based clinical AI tools</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Bedrick S, Miller K, Hersh WR, Liu H</p>
+                <p class="pub-venue">JMIR Artificial Intelligence</p>
+              </div>
+              <div class="pub-links"><a href="https://arxiv.org/pdf/2607.24793">PDF</a></div>
+	    </li>
+
             <li class="pub" data-type="ie">
               <span class="pub-year">2026</span>
               <div>
@@ -779,6 +792,27 @@
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocag084">DOI</a></div>
             </li>
+
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2025</span>
+              <div>
+                <p class="pub-title">Leveraging large language models for knowledge-free weak supervision in clinical natural language processing</p>
+		<p class="pub-authors"><span class="lab-member">Hsu E</span>, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Scientific Reports</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1038/s41598-024-68168-2">DOI</a></div>
+	    </li>
+
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2024</span>
+              <div>
+                <p class="pub-title">PheNormGPT: a framework for extraction and normalization of key medical findings</p>
+		<p class="pub-authors"><span class="lab-member">Soysal E</span>, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Database</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/database/baae103">DOI</a></div>
+	    </li>
+
             <li class="pub" data-type="ie">
               <span class="pub-year">2024</span>
               <div>
@@ -788,6 +822,17 @@
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1038/s41591-024-02888-w">DOI</a></div>
             </li>
+
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2024</span>
+              <div>
+                <p class="pub-title">Overview of the TREC 2024 Biomedical Generative Retrieval (BioGen) Track</p>
+		<p class="pub-authors">Gupta D, Demner-Fushman D, Hersh W, Bedrick S, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Text Retrieval Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://trec.nist.gov/pubs/trec33/papers/Overview_biogen.pdf">PDF</a></div>
+	    </li>
+
             <li class="pub" data-type="qa">
               <span class="pub-year">2024</span>
               <div>
@@ -797,6 +842,7 @@
               </div>
               <div class="pub-links"><a href="https://doi.org/10.2196/53636">DOI</a></div>
             </li>
+
             <li class="pub" data-type="qa">
               <span class="pub-year">2023</span>
               <div>
@@ -806,60 +852,189 @@
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocad050">DOI</a></div>
             </li>
-            <li class="pub" data-type="ie">
+
+            <!--<li class="pub" data-type="ie">
               <span class="pub-year">2022</span>
               <div>
                 <p class="pub-title">Deep learning-based NLP data pipeline for EHR-scanned document information extraction</p>
                 <p class="pub-authors"><span class="lab-member">Hsu E</span>, Malagaris I, Kuo YF, Sultana R, <strong>Roberts K</strong>.</p>
-                <p class="pub-venue">JAMIA Open <span class="cites">87 citations</span></p>
+                <p class="pub-venue">JAMIA Open</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamiaopen/ooac045">DOI</a></div>
-            </li>
-            <li class="pub" data-type="ir">
+	    </li>-->
+
+            <li class="pub" data-type="qa">
+              <span class="pub-year">2022</span>
+              <div>
+                <p class="pub-title">RadQA: A Question Answering Dataset to Improve Comprehension of Radiology Reports</p>
+		<p class="pub-authors"><span class="lab-member">Soni S</span>, Gudala M, Pajouhi A, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Language Resources and Evaluation Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://aclanthology.org/2022.lrec-1.672/">ACL</a></div>
+	    </li>
+
+            <li class="pub" data-type="">
+              <span class="pub-year">2022</span>
+              <div>
+                <p class="pub-title">Natural Language Processing</p>
+		<p class="pub-authors"><strong>Roberts K</strong></p>
+                <p class="pub-venue">Health Informatics: Practical Guide (8th Edition)</p>
+              </div>
+              <div class="pub-links"><a href="https://www.lulu.com/shop/william-hersh/health-informatics-practical-guide-8th-edition/paperback/product-ekrqez.html">Book</a></div>
+	    </li>
+
+            <!--<li class="pub" data-type="ir">
               <span class="pub-year">2021</span>
               <div>
                 <p class="pub-title">TREC-COVID: constructing a pandemic information retrieval test collection</p>
                 <p class="pub-authors">Voorhees E, Alam T, Bedrick S, Demner-Fushman D, Hersh WR, Lo K, <strong>Roberts K</strong>, Soboroff I, Wang LL.</p>
-                <p class="pub-venue">ACM SIGIR Forum <span class="cites">416 citations</span></p>
+                <p class="pub-venue">ACM SIGIR Forum</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1145/3451964.3451965">DOI</a></div>
-            </li>
+	    </li>-->
+
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2021</span>
+              <div>
+                <p class="pub-title">Overview of the TREC 2021 Clinical Trials Track</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Demner-Fushman D, Voorhees EM, Bedrick S, Hersh WR</p>
+                <p class="pub-venue">Text Retrieval Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://trec.nist.gov/pubs/trec31/papers/Overview_trials.pdf">PDF</a></div>
+	    </li>
+
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2020</span>
+              <div>
+                <p class="pub-title">Deep representation learning of patient data from Electronic Health Records (EHR): A systematic review</p>
+		<p class="pub-authors"><span class="lab-member">Si Y</span>, Du J, Li Z, Jiang X, Miller T, Wang F, Zheng WJ, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Journal of Biomedical Informatics</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1016/j.jbi.2020.103671">DOI</a></div>
+	    </li>
+
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2020</span>
+              <div>
+                <p class="pub-title">Understanding spatial language in radiology: Representation framework, annotation, and spatial relation extraction from chest X-ray reports using deep learning</p>
+		<p class="pub-authors"><span class="lab-member">Datta S</span>, <span class="lab-member">Si Y</span>, Rodriguez L, Shooshan SE, Demner-Fushman D, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Journal of Biomedical Informatics</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1016/j.jbi.2020.103473">DOI</a></div>
+	    </li>
+
             <li class="pub" data-type="ir">
               <span class="pub-year">2020</span>
               <div>
                 <p class="pub-title">TREC-COVID: rationale and structure of an information retrieval shared task for COVID-19</p>
                 <p class="pub-authors"><strong>Roberts K</strong>, Alam T, Bedrick S, Demner-Fushman D, Lo K, Soboroff I, Voorhees E, Wang LL, Hersh WR.</p>
-                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">173 citations</span></p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocaa091">DOI</a></div>
             </li>
+
             <li class="pub" data-type="ie">
+              <span class="pub-year">2020</span>
+              <div>
+                <p class="pub-title">Rad-SpatialNet: A Frame-based Resource for Fine-Grained Spatial Relations in Radiology Reports</p>
+		<p class="pub-authors"><span class="lab-member">Datta S</span>, Ulinski M, Godfrey-Stovall J, Khanpara S, Riascos-Castaneda RF, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Language Resources and Evaluation Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://aclanthology.org/2020.lrec-1.274/">ACL</a></div>
+	    </li>
+
+            <!--<li class="pub" data-type="ie">
               <span class="pub-year">2020</span>
               <div>
                 <p class="pub-title">Deep learning in clinical natural language processing: a methodical review</p>
                 <p class="pub-authors">Wu S, <strong>Roberts K</strong>, <span class="lab-member">Datta S</span>, Du J, Ji Z, <span class="lab-member">Si Y</span>, <span class="lab-member">Soni S</span>, Wang Q, Wei Q, Xiang Y, Zhao B, Xu H.</p>
-                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">654 citations</span></p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocz200">DOI</a></div>
-            </li>
+	    </li>-->
+
+            <li class="pub" data-type="ie">
+              <span class="pub-year">2019</span>
+              <div>
+                <p class="pub-title">A frame semantic overview of NLP-based information extraction for cancer-related EHR notes</p>
+		<p class="pub-authors"><span class="lab-member">Datta S</span>, Bernstam EV, <strong>Roberts K</strong></p>
+                <p class="pub-venue">Journal of Biomedical Informatics</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1016/j.jbi.2019.103301">DOI</a></div>
+	    </li>
+
             <li class="pub" data-type="ie">
               <span class="pub-year">2019</span>
               <div>
                 <p class="pub-title">Enhancing clinical concept extraction with contextual embeddings</p>
                 <p class="pub-authors"><span class="lab-member">Si Y</span>, Wang J, Xu H, <strong>Roberts K</strong>.</p>
-                <p class="pub-venue">Journal of the American Medical Informatics Association <span class="cites">465 citations</span></p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocz096">DOI</a></div>
             </li>
-            <li class="pub" data-type="ie">
+
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2017</span>
+              <div>
+                <p class="pub-title">Overview of the TREC 2017 Precision Medicine Track</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Demner-Fushman D, Voorhees EM, Hersh WR, Bedrick S, Lazar AJ, Pant S</p>
+                <p class="pub-venue">Text Retrieval Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-PM.pdf">PDF</a></div>
+	    </li>
+
+            <li class="pub" data-type="other">
+              <span class="pub-year">2017</span>
+              <div>
+                <p class="pub-title">Biomedical informatics advancing the national health agenda: the AMIA 2015 year-in-review in clinical and consumer informatics</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Boland MR, Pruinelli L, Dcruz J, Berry A, Georgsson M, Hazen R, Sarmiento RF, Backonja U, Yu K, Jiang Y, Brennan PF</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocw103">DOI</a></div>
+	    </li>
+
+            <!--<li class="pub" data-type="ie">
               <span class="pub-year">2016</span>
               <div>
                 <p class="pub-title">Learning to read chest X-rays: recurrent neural cascade model for automated image annotation</p>
                 <p class="pub-authors">Shin HC, <strong>Roberts K</strong>, Lu L, Demner-Fushman D, Yao J, Summers RM.</p>
-                <p class="pub-venue">IEEE Conference on Computer Vision and Pattern Recognition (CVPR) <span class="cites">564 citations</span></p>
+                <p class="pub-venue">IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</p>
               </div>
               <div class="pub-links"><a href="https://doi.org/10.1109/CVPR.2016.274">DOI</a></div>
-            </li>
+	    </li>-->
+
+            <li class="pub" data-type="ir">
+              <span class="pub-year">2016</span>
+              <div>
+                <p class="pub-title">Overview of the TREC 2016 Clinical Decision Support Track</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Demner-Fushman D, Voorhees EM, Hersh WR</p>
+                <p class="pub-venue">Text Retrieval Conference</p>
+              </div>
+              <div class="pub-links"><a href="https://trec.nist.gov/pubs/trec25/papers/Overview-CL.pdf">PDF</a></div>
+	    </li>
+
+            <li class="pub" data-type="qa">
+              <span class="pub-year">2016</span>
+              <div>
+                <p class="pub-title">Interative use of online health resources: a comparison of consumer and professional questions</p>
+		<p class="pub-authors"><strong>Roberts K</strong>, Demner-Fushman D</p>
+                <p class="pub-venue">Journal of the American Medical Informatics Association</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/10.1093/jamia/ocw024">DOI</a></div>
+	    </li>
+
+	    <!--
+            <li class="pub" data-type="TODO">
+              <span class="pub-year">TODO</span>
+              <div>
+                <p class="pub-title">TODO</p>
+                <p class="pub-authors">TODO</p>
+                <p class="pub-venue">TODO</p>
+              </div>
+              <div class="pub-links"><a href="https://doi.org/TODO">DOI</a></div>
+	    </li>
+	    -->
+
           </ol>
           <p class="more"><a href="https://scholar.google.com/citations?user=ukBG4CUAAAAJ&amp;hl=en">Full publication list on Google Scholar →</a></p>
         </section>
@@ -874,15 +1049,15 @@
           <!-- Add degree program and year to each .person-role, e.g. "PhD student, 3rd year".
                To link a profile, turn the <div class="person"> into <a class="person person-link" href="..."> and add the Scholar chip. -->
           <div class="team">
-            <a class="person person-link" href="https://scholar.google.com/citations?user=uOeW3MAAAAAJ&amp;hl=en" aria-label="Enshuo (David) Hsu on Google Scholar"><span class="person-mark">EH</span><div><p class="person-name">Enshuo (David) Hsu</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
-            <a class="person person-link" href="https://scholar.google.com/citations?user=AKyClScAAAAJ&amp;hl=en" aria-label="Ekin Soysal on Google Scholar"><span class="person-mark">ES</span><div><p class="person-name">Ekin Soysal</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
-            <a class="person person-link" href="https://scholar.google.com/citations?user=UUBrD1MAAAAJ&amp;hl=en" aria-label="Alaleh Hamidi on Google Scholar"><span class="person-mark">AH</span><div><p class="person-name">Alaleh Hamidi</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
-            <div class="person"><span class="person-mark">SG</span><div><p class="person-name">Shefali Gupta</p><p class="person-role">Student</p></div></div>
-            <a class="person person-link" href="https://scholar.google.com/citations?user=cxYWzUMAAAAJ&amp;hl=en" aria-label="Luke Rasmussen on Google Scholar"><span class="person-mark">LR</span><div><p class="person-name">Luke Rasmussen</p><p class="person-role">Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
-            <div class="person"><span class="person-mark">ES</span><div><p class="person-name">Evan Sholle</p><p class="person-role">Student</p></div></div>
-            <div class="person"><span class="person-mark">JK</span><div><p class="person-name">Junyoung Kim</p><p class="person-role">Student</p></div></div>
-            <div class="person"><span class="person-mark">LY</span><div><p class="person-name">Linzi Yu</p><p class="person-role">Student</p></div></div>
-            <div class="person"><span class="person-mark">TL</span><div><p class="person-name">Trevor La</p><p class="person-role">Student</p></div></div>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=uOeW3MAAAAAJ&amp;hl=en" aria-label="Enshuo (David) Hsu on Google Scholar"><span class="person-mark">EH</span><div><p class="person-name">Enshuo (David) Hsu</p><p class="person-role">MSBMI PhD Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=AKyClScAAAAJ&amp;hl=en" aria-label="Ekin Soysal on Google Scholar"><span class="person-mark">ES</span><div><p class="person-name">Ekin Soysal</p><p class="person-role">MSBMI PhD Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=UUBrD1MAAAAJ&amp;hl=en" aria-label="Alaleh Hamidi on Google Scholar"><span class="person-mark">AH</span><div><p class="person-name">Alaleh Hamidi</p><p class="person-role">MSBMI PhD Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <div class="person"><span class="person-mark">SG</span><div><p class="person-name">Shefali Gupta</p><p class="person-role">SPH PhD Student</p></div></div>
+            <a class="person person-link" href="https://scholar.google.com/citations?user=cxYWzUMAAAAJ&amp;hl=en" aria-label="Luke Rasmussen on Google Scholar"><span class="person-mark">LR</span><div><p class="person-name">Luke Rasmussen</p><p class="person-role">MSBMI PhD Student</p></div><span class="scholar-chip">Scholar ↗</span></a>
+            <div class="person"><span class="person-mark">ES</span><div><p class="person-name">Evan Sholle</p><p class="person-role">MSBMI PhD Student</p></div></div>
+            <div class="person"><span class="person-mark">JK</span><div><p class="person-name">Junyoung Kim</p><p class="person-role">MSBMI PhD Student</p></div></div>
+            <div class="person"><span class="person-mark">LY</span><div><p class="person-name">Linzi Yu</p><p class="person-role">MSBMI PhD Student</p></div></div>
+            <div class="person"><span class="person-mark">TL</span><div><p class="person-name">Trevor La</p><p class="person-role">GSBS MS Student</p></div></div>
           </div>
 
           <div class="section-head sub-head">
@@ -905,7 +1080,7 @@
               <h2>Appointments</h2>
               <ul class="list" style="margin-top: 24px;">
                 <li><span class="when">2021–now</span><span><strong>Associate Professor</strong><br><span class="muted">McWilliams School of Biomedical Informatics, UTHealth Houston</span></span></li>
-                <li><span class="when">2016–2021</span><span><strong>Assistant Professor</strong><br><span class="muted">School of Biomedical Informatics, UTHealth Houston</span></span></li>
+                <li><span class="when">2016–2021</span><span><strong>Assistant Professor</strong><br><span class="muted">McWilliams School of Biomedical Informatics, UTHealth Houston</span></span></li>
                 <li><span class="when">2013–2016</span><span><strong>Postdoctoral Fellow</strong><br><span class="muted">Lister Hill National Center for Biomedical Communications, U.S. National Library of Medicine</span></span></li>
               </ul>
             </div>
@@ -915,7 +1090,7 @@
               <ul class="list" style="margin-top: 24px;">
                 <li><span class="when">2013</span><span><strong>PhD, Computer Science</strong><br><span class="muted">University of Texas at Dallas</span></span></li>
                 <li><span class="when">2009</span><span><strong>MS, Computer Science</strong><br><span class="muted">University of Texas at Dallas</span></span></li>
-                <li><span class="when">2005</span><span><strong>BS, Computer Science</strong><br><span class="muted">Georgia Institute of Technology</span></span></li>
+                <li><span class="when">2005</span><span><strong>BS, Computer Science</strong><br><span class="muted">Georgia Institute of Technology (Georgia Tech)</span></span></li>
               </ul>
             </div>
           </div>
